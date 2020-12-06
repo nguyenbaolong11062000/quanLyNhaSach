@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>LT Book Store</title>
+    <title>Bookstore</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#03a6f3">
     <link rel="stylesheet" href="{{ url_for('static', filename = 'css/bootstrap.min.css') }}">
@@ -18,10 +18,10 @@
     {% include 'review.html' %}
     {% include 'body.html' %}
     {% include 'footer.html' %}
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/owl.carousel.min.js"></script>
-    <script src="js/custom.js"></script>
+    <script src="{{ url_for('static', filename = 'js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename = 'js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename = 'js/owl.carousel.min.js') }}"></script>
+    <script src="{{ url_for('static', filename = 'js/custom.js') }}"></script>
 </body>
 
 </html>

@@ -1,8 +1,12 @@
-from flask import render_template, request
+import hashlib
+
+from flask import render_template, request, url_for
 from nha_sach import app, login, utils
 from nha_sach.admin import *
 from flask_login import login_user
 import os
+
+from nha_sach.models import User, UserRole
 
 
 @app.route('/')
@@ -30,7 +34,24 @@ def book_detail(book_id):
                            book=book)
 
 
-@app.route('/login', methods = ['post'])
+@app.route('/login-user', methods=['POST', 'GET'])
+def login_usr():
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password', '')
+        password = hashlib.md5(password.encode('utf-8')).hexdigest()
+        user = User.query.filter(User.username == username.strip(),
+                             User.password == password).first()
+        if user:
+            login_user(user=user)
+
+    elif request.method == 'GET':
+        return render_template('login_user.html')
+
+    return redirect(url_for('index'))
+
+
+@app.route('/login', methods=['POST', 'GET'])
 def login_admin():
     username = request.form.get('username')
     password = request.form.get('password', '')
@@ -42,6 +63,10 @@ def login_admin():
 
     return redirect('/admin')
 
+@app.route('/logout')
+def logout_usr():
+    logout_user()
+    return redirect(url_for('index'))
 
 @app.route('/register', methods=['get', 'post'])
 def register():
@@ -57,6 +82,7 @@ def register():
 
             avatar_path = 'images/upload/%s' % avatar.filename
             avatar.save(os.path.join(app.root_path, 'static/', avatar_path))
+
             if utils.add_user(name=name, email=email, username=username,
                               password=password, avatar_path=avatar_path):
                 return redirect('/')
