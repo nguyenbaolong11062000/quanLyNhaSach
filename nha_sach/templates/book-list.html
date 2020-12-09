@@ -46,7 +46,7 @@
             {% for p in book %}
             <tr>
                 <td>
-                    <img width="120" src="{{ url_for('static', filename=book.image) }}" alt="{{ p.name }}" />
+                    <img width="120" src="{{ url_for('static', filename=p.image) }}" alt="{{ p.name }}" />
                 </td>
                 <td> {{ p.id }} </td>
                 <td>

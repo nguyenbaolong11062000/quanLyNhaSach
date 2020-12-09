@@ -7,11 +7,11 @@ def read_data(path='data/typeOfBook.json'):
         return json.load(f)
 
 
-def read_books(typebook_id=None, kw=None, from_price=None, to_price=None):
+def read_books(tpbook_id=None, kw=None, from_price=None, to_price=None):
     books = Book.query
 
-    if typebook_id:
-        books = books.filter(Book.typeofbook_id == typebook_id)
+    if tpbook_id:
+        books = books.filter(Book.typeofbook_id == tpbook_id)
 
     if kw:
         books = books.filter(Book.name.contains(kw))
@@ -23,10 +23,10 @@ def read_books(typebook_id=None, kw=None, from_price=None, to_price=None):
     return books.all()
     # books = read_data(path='data/book.json')
     #
-    # if book_id:
-    #     cate_id = int(book_id)
+    # if tpbook_id:
+    #     tpbook_id = int(tpbook_id)
     #     books = [p for p in books
-    #                 if p['typeofbook_id'] == book_id]
+    #              if p['tpbook_id'] == tpbook_id]
     #
     # if kw:
     #     books = [p for p in books
@@ -57,11 +57,19 @@ def check_login(username, password, role = UserRole.ADMIN):
                              User.user_role == role).first()
     return user
 
+def check_loginUser(username, password, role = UserRole.USER):
+    password = str(hashlib.md5(password.strip().encode('utf-8')).hexdigest())
 
-def add_user(name, email, username, password, avatar_path):
+    user = User.query.filter(User.username == username.strip(),
+                             User.password == password,
+                             User.user_role == role).first()
+    return user
+
+
+def add_user(name, email, username, password, gender, avatar_path):
     password = str(hashlib.md5(password.strip().encode('utf-8')).hexdigest())
     u = User(name=name, email=email,
-             username=username, password=password,
+             username=username, password=password, gender=gender,
              avatar=avatar_path)
     try:
         db.session.add(u)
