@@ -91,7 +91,7 @@ class InventoryReport(db.Model):
     __tablename__ = 'inventory_report'
     id = Column(Integer, primary_key=True, autoincrement=True)
     created_date = Column(DateTime, default=datetime.today())
-    inventory = relationship('Inventory', backref='inventory_report', lazy=True)
+    inventory = relationship('InventoryDetailReport', backref='inventory_report', lazy=True)
 
 class InventoryDetailReport(db.Model):
     __tablename__ = 'inventory_detail_report'

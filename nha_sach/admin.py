@@ -3,7 +3,7 @@ from flask import redirect
 from nha_sach import admin, db
 from flask_admin.contrib.sqla import ModelView
 from flask_admin import BaseView, expose
-from nha_sach.models import TypeOfBook, Book, InfoSach
+from nha_sach.models import *
 
 
 class ContactView(BaseView):
@@ -31,12 +31,20 @@ class TypeOfBookModelView(ModelView):
     def is_accessible(self):
         return current_user.is_authenticated
 
-class InfoSachView(ModelView):
+class InventoryReportView(ModelView):
     column_display_pk = True;
     can_export = True
 
     def is_accessible(self):
         return current_user.is_authenticated
+
+class InventoryDetailReportView(ModelView):
+    column_display_pk = True;
+    can_export = True
+
+    def is_accessible(self):
+        return current_user.is_authenticated
+
 
 
 class LogoutView(BaseView):
@@ -50,9 +58,11 @@ class LogoutView(BaseView):
         return current_user.is_authenticated
 
 
+
 admin.add_view(TypeOfBookModelView(TypeOfBook, db.session))
 admin.add_view(BookView(Book, db.session))
-admin.add_view(InfoSachView(InfoSach, db.session))
+admin.add_view(InventoryReportView(InventoryReport, db.session))
+admin.add_view(InventoryDetailReportView(InventoryDetailReport, db.session))
 admin.add_view(ContactView(name='Liên hệ'))
 admin.add_view(AboutUsView(name='About Us'))
 admin.add_view(LogoutView(name='Logout'))
