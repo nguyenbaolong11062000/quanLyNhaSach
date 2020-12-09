@@ -1,0 +1,64 @@
+[{
+ "id": 1,
+ "name": "Doraemon",
+ "description": "Truyện hoạt hình, hài hước",
+ "price": 20000,
+ "image": "images/doraemon.png",
+ "tpbook_id": 1
+}, {
+ "id": 2,
+ "name": "Thám tử lừng danh Conan",
+ "description": "Truyện trinh thám, hài hước",
+ "price": 30000,
+ "image": "images/conan.png",
+ "tpbook_id": 1
+}, {
+ "id": 3,
+ "name": "Sách Giáo Khoa 12",
+ "description": "Hóa học 12, Anh Văn 12, Giải tích 12, ...",
+ "price": 245500,
+ "image": "images/SGK12.png",
+ "tpbook_id": 2
+},{
+ "id": 4,
+ "name": "Sách Học lập trình",
+ "description": "Ngôn ngữ Python",
+ "price": 95000,
+ "image": "images/Python.png",
+ "tpbook_id": 4
+},{
+ "id": 5,
+ "name": "Kỹ năng học tập",
+ "description": "Tự học, phát triển kỹ năng độc lập",
+ "price": 75000,
+ "image": "images/tuhoc.png",
+ "tpbook_id": 4
+},{
+ "id": 6,
+ "name": "Tạp chí Hoa Học Trò",
+ "description": "Giải trí, tâm lý hay những câu chuyện dành cho lứa tuổi thanh thiếu niên",
+ "price": 180000,
+ "image": "images/hoahoctro.png",
+ "tpbook_id": 3
+},{
+ "id": 7,
+ "name": "Báo bóng đá",
+ "description": "Các tin tức thể thao trong nước và quốc tế",
+ "price": 10000,
+ "image": "images/baosoccer.png",
+ "tpbook_id": 3
+},{
+ "id": 8,
+ "name": "Sách Giáo Khoa 9",
+ "description": "Hóa học 9, Anh Văn 9, Đại Số 9, ...",
+ "price": 231700,
+ "image": "images/SGK9.png",
+ "tpbook_id": 2
+},{
+ "id": 9,
+ "name": "Sách Giáo Khoa 5",
+ "description": "Tiếng Việt 5, Toán 5, Khoa học 5, ...",
+ "price": 202500,
+ "image": "images/SGK5.png",
+ "tpbook_id": 2
+}]

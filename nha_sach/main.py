@@ -47,8 +47,13 @@ def login_usr():
 
     elif request.method == 'GET':
         return render_template('login_user.html')
+<<<<<<< HEAD
     # url_for('index')
     return redirect('/')
+=======
+
+    return redirect(url_for('index'))
+>>>>>>> 301e321a029854709cf2f8610020c4d530b3d4f2
 
 
 @app.route('/login', methods=['POST', 'GET'])
@@ -84,7 +89,11 @@ def register():
             avatar_path = 'images/upload/%s' % avatar.filename
             avatar.save(os.path.join(app.root_path, 'static/', avatar_path))
 
+<<<<<<< HEAD
             if utils.add_user(name=name, email=email, username=username, gender=gender,
+=======
+            if utils.add_user(name=name, email=email, username=username,
+>>>>>>> 301e321a029854709cf2f8610020c4d530b3d4f2
                               password=password, avatar_path=avatar_path):
                 return redirect('/')
             else:
