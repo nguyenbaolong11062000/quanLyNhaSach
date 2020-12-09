@@ -72,7 +72,7 @@ def logout_usr():
 def register():
     err_msg = ""
     if request.method == 'POST':
-        password = request.form.get('password')
+        password = request.form.get('password') 
         confirm = request.form.get('confirm')
         if password == confirm:
             name = request.form.get('name')
