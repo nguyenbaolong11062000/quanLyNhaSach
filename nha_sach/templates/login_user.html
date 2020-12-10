@@ -19,6 +19,11 @@
 			<form method="post" action="{{ url_for('login_usr') }}">
 				<img src="../static/images/avatar.svg">
 				<h2 class="title">Welcome</h2>
+				{% if err_msg %}
+				<div class="alert alert-warning">
+					{{ err_msg }}
+				</div>
+				{% endif %}
            		<div class="input-div one">
            		   <div class="i">
            		   		<i class="fas fa-user"></i>

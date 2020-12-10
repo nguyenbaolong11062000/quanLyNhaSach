@@ -55,7 +55,6 @@ class User(db.Model, UserMixin):
     user_role = Column(Enum(UserRole), default=UserRole.USER)
     receipt = relationship('Receipt', backref='user', lazy=True)
     coupon_id = relationship('Coupon', backref='user', lazy=True)
-    customer_id = relationship('Customer', backref='user', lazy=True)
 
     def __str__(self):
         return self.name
@@ -65,10 +64,8 @@ class Customer(SaleBase, UserMixin):
     identity_card = Column(String(20))
     email = Column(String(50))
     phone = Column(String(20))
-    receipt = relationship('Receipt', backref='customer', lazy=True)
     bill = relationship('Bill', backref='customer', lazy=True)
     dept = relationship('DeptDetailReport', backref='customer', lazy=True)
-    user_id = Column(Integer, ForeignKey(User.id), nullable=False)
 
 
 class Receipt(db.Model):
@@ -76,8 +73,7 @@ class Receipt(db.Model):
     id = Column(Integer, primary_key=True, autoincrement=True)
     created_date = Column(DateTime, default=datetime.today())
     user_id = Column(Integer, ForeignKey(User.id), nullable=False)
-    customer_id = Column(Integer, ForeignKey(Customer.id), nullable=False)
-    details = relationship('ReceiptDetail', backref="receipt", lazy=True)
+    receipt_details = relationship('ReceiptDetail', backref="receipt", lazy=True)
 
 
 class ReceiptDetail(db.Model):

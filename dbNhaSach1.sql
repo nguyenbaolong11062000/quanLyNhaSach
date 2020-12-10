@@ -30,7 +30,7 @@ CREATE TABLE `bill` (
   PRIMARY KEY (`id`),
   KEY `customer_id` (`customer_id`),
   CONSTRAINT `bill_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,6 +39,7 @@ CREATE TABLE `bill` (
 
 LOCK TABLES `bill` WRITE;
 /*!40000 ALTER TABLE `bill` DISABLE KEYS */;
+INSERT INTO `bill` VALUES (1,'2020-12-10 21:26:06',150000,1),(2,'2020-12-10 21:26:06',50000,2);
 /*!40000 ALTER TABLE `bill` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -67,6 +68,7 @@ CREATE TABLE `bill_detail` (
 
 LOCK TABLES `bill_detail` WRITE;
 /*!40000 ALTER TABLE `bill_detail` DISABLE KEYS */;
+INSERT INTO `bill_detail` VALUES (1,1,3,50000),(2,4,2,25000);
 /*!40000 ALTER TABLE `bill_detail` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -87,7 +89,7 @@ CREATE TABLE `book` (
   PRIMARY KEY (`id`),
   KEY `typeofbook_id` (`typeofbook_id`),
   CONSTRAINT `book_ibfk_1` FOREIGN KEY (`typeofbook_id`) REFERENCES `typeofbook` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -96,6 +98,7 @@ CREATE TABLE `book` (
 
 LOCK TABLES `book` WRITE;
 /*!40000 ALTER TABLE `book` DISABLE KEYS */;
+INSERT INTO `book` VALUES (1,'Doraemon','Truyện hoạt hình, hài hước',20000,'images/doraemon.png',1),(2,'Goblin','Ngôn tình Hàn Quốc',100000,NULL,2),(3,'Hoa Học Trò','Tạp chí thiếu niên',10000,NULL,4),(4,'Báo Bóng Đá','Tin thể thao đa dạng',5000,NULL,3);
 /*!40000 ALTER TABLE `book` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -113,7 +116,7 @@ CREATE TABLE `coupon` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `coupon_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -122,6 +125,7 @@ CREATE TABLE `coupon` (
 
 LOCK TABLES `coupon` WRITE;
 /*!40000 ALTER TABLE `coupon` DISABLE KEYS */;
+INSERT INTO `coupon` VALUES (1,'2020-12-10 21:26:06',1),(2,'2020-12-10 21:26:06',1);
 /*!40000 ALTER TABLE `coupon` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -149,6 +153,7 @@ CREATE TABLE `coupon_detail` (
 
 LOCK TABLES `coupon_detail` WRITE;
 /*!40000 ALTER TABLE `coupon_detail` DISABLE KEYS */;
+INSERT INTO `coupon_detail` VALUES (1,1,5000),(1,2,6000),(2,3,4000),(2,4,1500);
 /*!40000 ALTER TABLE `coupon_detail` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -165,11 +170,8 @@ CREATE TABLE `customer` (
   `identity_card` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `email` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `phone` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `user_id` int NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`),
-  CONSTRAINT `customer_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -178,6 +180,7 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
+INSERT INTO `customer` VALUES (1,'Nguyễn Bảo Long','123456789','1851050083long@ou.edu.vn','456789123'),(2,'Mai Xuân Thọ','789456123','1851050136tho@ou.edu.vn','147258369');
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -207,6 +210,7 @@ CREATE TABLE `dept_detail_report` (
 
 LOCK TABLES `dept_detail_report` WRITE;
 /*!40000 ALTER TABLE `dept_detail_report` DISABLE KEYS */;
+INSERT INTO `dept_detail_report` VALUES (1,1,50000,120000,'70000'),(1,2,120000,0,'0'),(2,1,120000,0,'0');
 /*!40000 ALTER TABLE `dept_detail_report` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -221,7 +225,7 @@ CREATE TABLE `dept_report` (
   `id` int NOT NULL AUTO_INCREMENT,
   `created_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -230,6 +234,7 @@ CREATE TABLE `dept_report` (
 
 LOCK TABLES `dept_report` WRITE;
 /*!40000 ALTER TABLE `dept_report` DISABLE KEYS */;
+INSERT INTO `dept_report` VALUES (1,'2020-12-10 21:26:06'),(2,'2020-12-10 21:26:06');
 /*!40000 ALTER TABLE `dept_report` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -259,6 +264,7 @@ CREATE TABLE `inventory_detail_report` (
 
 LOCK TABLES `inventory_detail_report` WRITE;
 /*!40000 ALTER TABLE `inventory_detail_report` DISABLE KEYS */;
+INSERT INTO `inventory_detail_report` VALUES (1,1,1500,0,'0'),(1,2,2000,2500,'500'),(2,3,6000,7500,'1500');
 /*!40000 ALTER TABLE `inventory_detail_report` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -273,7 +279,7 @@ CREATE TABLE `inventory_report` (
   `id` int NOT NULL AUTO_INCREMENT,
   `created_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -282,6 +288,7 @@ CREATE TABLE `inventory_report` (
 
 LOCK TABLES `inventory_report` WRITE;
 /*!40000 ALTER TABLE `inventory_report` DISABLE KEYS */;
+INSERT INTO `inventory_report` VALUES (1,'2020-12-10 21:26:06'),(2,'2020-12-10 21:26:06');
 /*!40000 ALTER TABLE `inventory_report` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -296,13 +303,10 @@ CREATE TABLE `receipt` (
   `id` int NOT NULL AUTO_INCREMENT,
   `created_date` datetime DEFAULT NULL,
   `user_id` int NOT NULL,
-  `customer_id` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
-  KEY `customer_id` (`customer_id`),
-  CONSTRAINT `receipt_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
-  CONSTRAINT `receipt_ibfk_2` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  CONSTRAINT `receipt_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -311,6 +315,7 @@ CREATE TABLE `receipt` (
 
 LOCK TABLES `receipt` WRITE;
 /*!40000 ALTER TABLE `receipt` DISABLE KEYS */;
+INSERT INTO `receipt` VALUES (1,'2020-12-10 21:26:06',1),(2,'2020-12-10 21:26:06',1);
 /*!40000 ALTER TABLE `receipt` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -339,6 +344,7 @@ CREATE TABLE `receipt_detail` (
 
 LOCK TABLES `receipt_detail` WRITE;
 /*!40000 ALTER TABLE `receipt_detail` DISABLE KEYS */;
+INSERT INTO `receipt_detail` VALUES (1,1,3,50000),(2,4,2,25000);
 /*!40000 ALTER TABLE `receipt_detail` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -353,7 +359,7 @@ CREATE TABLE `typeofbook` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -362,6 +368,7 @@ CREATE TABLE `typeofbook` (
 
 LOCK TABLES `typeofbook` WRITE;
 /*!40000 ALTER TABLE `typeofbook` DISABLE KEYS */;
+INSERT INTO `typeofbook` VALUES (1,'Truyện Tranh'),(2,'Ngôn Tình'),(3,'Báo'),(4,'Tạp Chí'),(5,'Sách Giáo Khoa');
 /*!40000 ALTER TABLE `typeofbook` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -407,4 +414,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-09 21:08:09
+-- Dump completed on 2020-12-10 21:40:06

@@ -1,7 +1,7 @@
 import hashlib
 
-from flask import render_template, request, url_for
-from nha_sach import app, login, utils
+from flask import render_template, request, url_for, session
+from nha_sach import app, login, utils, decorator
 from nha_sach.admin import *
 from flask_login import login_user
 import os
@@ -36,6 +36,7 @@ def book_detail(book_id):
 
 @app.route('/login-user', methods=['POST', 'GET'])
 def login_usr():
+    err_msg = ""
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password', '')
@@ -44,22 +45,26 @@ def login_usr():
                              User.password == password).first()
         if user:
             login_user(user=user)
+            if "next" in request.args:
+                return redirect(request.args["next"])
+            return redirect(url_for("index"))
+        else:
+            err_msg = "Đăng nhập không thành công!"
 
-    elif request.method == 'GET':
-        return render_template('login_user.html')
-    # url_for('index')
-    return redirect('/')
+
+    return render_template("login_user.html", err_msg=err_msg)
 
 
-@app.route('/login', methods=['POST', 'GET'])
+@app.route('/login', methods=['GET', 'POST'])
 def login_admin():
-    username = request.form.get('username')
-    password = request.form.get('password', '')
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password', '')
 
-    user = utils.check_login(username=username,
-                             password=password)
-    if user:
-        login_user(user=user)
+        user = utils.check_login(username=username,
+                                 password=password)
+        if user:
+            login_user(user=user)
 
     return redirect('/admin')
 
@@ -72,7 +77,7 @@ def logout_usr():
 def register():
     err_msg = ""
     if request.method == 'POST':
-        password = request.form.get('password') 
+        password = request.form.get('password')
         confirm = request.form.get('confirm')
         if password == confirm:
             name = request.form.get('name')
