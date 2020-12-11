@@ -1,5 +1,5 @@
 import json, hashlib
-from nha_sach.models import User, UserRole, Book
+from nha_sach.models import User, UserRole, Book, Customer
 from nha_sach import db
 
 def read_data(path='data/typeOfBook.json'):
@@ -57,28 +57,25 @@ def check_login(username, password, role = UserRole.ADMIN):
                              User.user_role == role).first()
     return user
 
-def check_loginUser(username, password, role = UserRole.USER):
+
+
+def add_user(name, phone, email, username, password, gender, avatar_path):
     password = str(hashlib.md5(password.strip().encode('utf-8')).hexdigest())
-
-    user = User.query.filter(User.username == username.strip(),
-                             User.password == password,
-                             User.user_role == role).first()
-    return user
-
-
-def add_user(name, email, username, password, gender, avatar_path):
-    password = str(hashlib.md5(password.strip().encode('utf-8')).hexdigest())
-    u = User(name=name, email=email,
+    u = Customer(name=name, email=email, phone=phone,
+             username=username, password=password, gender=gender,
+             avatar=avatar_path)
+    y = User(name=name, email=email,
              username=username, password=password, gender=gender,
              avatar=avatar_path)
     try:
+        db.session.add(y)
         db.session.add(u)
         db.session.commit()
         return True
     except Exception as ex:
         print(ex)
         return False
-    
+
     
 def get_user_by_id(user_id):
    return User.query.get(user_id)

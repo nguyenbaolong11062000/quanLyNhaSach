@@ -6,7 +6,7 @@ from nha_sach.admin import *
 from flask_login import login_user
 import os
 
-from nha_sach.models import User, UserRole
+from nha_sach.models import Customer, User
 
 
 @app.route('/')
@@ -41,12 +41,11 @@ def login_usr():
         username = request.form.get('username')
         password = request.form.get('password', '')
         password = hashlib.md5(password.encode('utf-8')).hexdigest()
+
         user = User.query.filter(User.username == username.strip(),
                              User.password == password).first()
         if user:
             login_user(user=user)
-            if "next" in request.args:
-                return redirect(request.args["next"])
             return redirect(url_for("index"))
         else:
             err_msg = "Đăng nhập không thành công!"
@@ -73,13 +72,15 @@ def logout_usr():
     logout_user()
     return redirect(url_for('index'))
 
-@app.route('/register', methods=['get', 'post'])
-def register():
+
+@app.route('/registerCustomer', methods=['get', 'post'])
+def registerCustomer():
     err_msg = ""
     if request.method == 'POST':
         password = request.form.get('password')
         confirm = request.form.get('confirm')
         if password == confirm:
+            phone = request.form.get('phone')
             name = request.form.get('name')
             email = request.form.get('email')
             username = request.form.get('username')
@@ -89,7 +90,8 @@ def register():
             avatar_path = 'images/upload/%s' % avatar.filename
             avatar.save(os.path.join(app.root_path, 'static/', avatar_path))
 
-            if utils.add_user(name=name, email=email, username=username, gender=gender,
+            if utils.add_user(name=name, email=email, phone=phone,
+                              username=username, gender=gender,
                               password=password, avatar_path=avatar_path):
                 return redirect('/')
             else:
@@ -97,7 +99,9 @@ def register():
         else:
             err_msg = "Mật khẩu không khớp!"
 
-    return render_template('registerUser.html', err_msg=err_msg)
+    return render_template('registerCustomer.html', err_msg=err_msg)
+
+
 
 @login.user_loader
 def get_user(user_id):

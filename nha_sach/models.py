@@ -61,13 +61,19 @@ class User(db.Model, UserMixin):
 
 class Customer(SaleBase, UserMixin):
     __tablename__ = 'customer'
-    identity_card = Column(String(20))
     email = Column(String(50))
-    phone = Column(String(20))
+    username = Column(String(100), nullable=False, unique=True)
+    password = Column(String(100), nullable=False)
+    gender = Column(String(100), nullable=False)
+    avatar = Column(String(100))
+    phone = Column(String(100), nullable=False)
+    active = Column(Boolean, default=True)
+    user_role = Column(Enum(UserRole), default=UserRole.USER)
     bill = relationship('Bill', backref='customer', lazy=True)
     dept = relationship('DeptDetailReport', backref='customer', lazy=True)
 
-
+    def __str__(self):
+        return self.name
 class Receipt(db.Model):
     __tablename__ = 'receipt'
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -79,7 +85,7 @@ class Receipt(db.Model):
 class ReceiptDetail(db.Model):
     __tablename__ = 'receipt_detail'
     receipt_id = Column(Integer, ForeignKey(Receipt.id), primary_key=True)
-    book_id = Column(Integer, ForeignKey(Book.id), nullable=False)
+    book_id = Column(Integer, ForeignKey(Book.id), primary_key=True)
     quantity = Column(Integer, default=0)
     price = Column(Float, default=0)
 
