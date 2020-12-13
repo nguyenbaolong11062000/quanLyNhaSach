@@ -5,10 +5,13 @@
     <title>Tra Cứu Sách</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
     <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" />
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </head>
-<body>
+<body style="background-image: url('../static/images/wave.png');">
     <div class="container">
-        <h1 class="text-center text-danger">DANH SÁCH CÁC LOẠI SÁCH</h1>
+        <h1 class="text-center text-danger">DANH SÁCH CÁC LOẠI SÁCH
+            <a class="badge badge-primary" href=" {{ url_for('payment') }} " id="cart-info"></a>
+        </h1>
         <div>
             <form>
                 <div class="form-group">
@@ -38,23 +41,24 @@
         <table class="table">
             <tr>
                 <th></th>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Price</th>
+                <th><h5>Id</h5></th>
+                <th><h5>Name</h5></th>
+                <th><h5>Price</h5></th>
                 <th></th>
             </tr>
-            {% for p in book %}
+            {% for p in books %}
             <tr>
                 <td>
                     <img width="120" src="{{ url_for('static', filename=p.image) }}" alt="{{ p.name }}" />
                 </td>
-                <td> {{ p.id }} </td>
+                <td> <h5>{{ p.id }}</h5> </td>
                 <td>
-                    <a href="{{ url_for('book_detail', book_id=p.id) }}">{{ p.name }}</a>
+                    <a href="{{ url_for('book_detail', book_id=p.id) }}"><h5 class="text-dark">{{ p.name }}</h5></a>
                 </td>
-                <td> {{ "{:,.1f}".format(p.price) }} VNĐ</td>
+                <td> <h5>{{ "{:,.1f}".format(p.price) }} VNĐ</h5></td>
                 <td>
-                    <a href="">Đặt Hàng</a>
+                    <a href="javascript:;"
+                       onclick="addToCart({{ p.id }}, '{{p.name}}', {{ p.price }})"><h5>Đặt hàng</h5></a>
                 </td>
             </tr>
             {% endfor %}

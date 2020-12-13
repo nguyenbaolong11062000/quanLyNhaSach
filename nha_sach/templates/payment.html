@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Thanh toán</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" />
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</head>
+<body>
+    <div class="wrapper" style="background-image: url('../static/images/suite-02.jpg');">
+        <div class="container">
+            <div class="alert alert-success" style="background-image: url('../static/images/wave.png');">
+                <div>
+                <h1 class="text-center">THANH TOÁN GIỎ HÀNG</h1>
+                </div>
+                <div class="alert">
+                    <h3>Số lượng sản phẩm: {{ cart_info.total_quantity }}</h3>
+                    <h3>Tổng tiền: {{ "{:,.1f}".format(cart_info.total_amount) }} VNĐ</h3>
+                </div>
+            </div>
+
+            <table class="table table-secondary table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th class="text-center">Id</th>
+                        <th class="text-center">Tên sản phẩm</th>
+                        <th class="text-center">Gía</th>
+                        <th class="text-center">Số lượng</th>
+                    </tr>
+                </thead>
+                {% if 'cart' in session %}
+                {% for p in session['cart'].values() %}
+                <tr>
+                    <td class="text-center">{{ p.id }}</td>
+                    <td class="text-center">{{ p.name }}</td>
+                    <td class="text-center">{{ "{:,.1f}".format(p.price) }} VNĐ</td>
+                    <td class="text-center">
+                        <div class="form-group">
+                            <input type="number"
+                                   value="{{ p.quantity }}"
+                                   class="form-control" />
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+                {% else %}
+                <tr>
+                    <td class="text-center" colspan="4">Không có sản phẩm nào!</td>
+                </tr>
+                {% endif %}
+            </table>
+            <input  type="button"
+                    onclick="pay()"
+                    value="Thanh toán"
+                    class="btn btn-danger" />
+        </div>
+    </div>
+</body>
+</html>

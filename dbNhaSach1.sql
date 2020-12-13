@@ -89,7 +89,7 @@ CREATE TABLE `book` (
   PRIMARY KEY (`id`),
   KEY `typeofbook_id` (`typeofbook_id`),
   CONSTRAINT `book_ibfk_1` FOREIGN KEY (`typeofbook_id`) REFERENCES `typeofbook` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -98,7 +98,7 @@ CREATE TABLE `book` (
 
 LOCK TABLES `book` WRITE;
 /*!40000 ALTER TABLE `book` DISABLE KEYS */;
-INSERT INTO `book` VALUES (1,'Doraemon','Truyện hoạt hình, hài hước',20000,'images/doraemon.png',1),(2,'Goblin','Ngôn tình Hàn Quốc',100000,NULL,2),(3,'Hoa học trò','Tạp chí thiếu niên',15000,NULL,4),(4,'Báo bóng đá','Tin tức thể thao đa dạng',5000,NULL,3);
+INSERT INTO `book` VALUES (1,'Doraemon','Truyện hoạt hình, hài hước',20000,'images/doraemon.png',1),(2,'Goblin','Ngôn tình Hàn Quốc',100000,'images/goblin.png',2),(3,'Hoa học trò','Tạp chí thiếu niên',15000,'images/hoahoctro.png',4),(4,'Báo bóng đá','Tin tức thể thao đa dạng',5000,'images/baosoccer.png',3),(5,'Sách giáo khoa Lớp 12','Đa dạng các môn học',192000,'images/SGK12.png',5),(6,'Conan','Truyện trinh thám',50000,'images/conan.png',1);
 /*!40000 ALTER TABLE `book` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -421,4 +421,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-11 12:17:39
+-- Dump completed on 2020-12-13 14:13:04

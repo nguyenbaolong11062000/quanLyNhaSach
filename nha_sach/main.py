@@ -1,10 +1,10 @@
 import hashlib
 
-from flask import render_template, request, url_for, session
+from flask import render_template, request, url_for, session, jsonify
 from nha_sach import app, login, utils, decorator
 from nha_sach.admin import *
 from flask_login import login_user
-import os
+import os, json
 
 from nha_sach.models import Customer, User
 
@@ -17,14 +17,14 @@ def index():
 
 @app.route('/book')
 def book_list():
-    tpbook_id = request.args.get('tpbook_id')
+    tpbook_id = request.args.get('typeofbook_id')
     kw = request.args.get('kw')
     from_price = request.args.get('from_price')
     to_price = request.args.get('to_price')
     books = utils.read_books(tpbook_id=tpbook_id, kw=kw, from_price=from_price, to_price=to_price)
 
     return render_template('book-list.html',
-                           books=books)
+                           books=books, tpbook_id=tpbook_id)
 
 
 @app.route('/books/<int:book_id>')
@@ -108,6 +108,60 @@ def get_user(user_id):
     return utils.get_user_by_id(user_id=user_id)
 
 
+@app.route('/api/cart', methods=['post'])
+def cart():
+    if 'cart' not in session:
+        session['cart'] = {}
 
+    cart = session['cart']
+
+    data = json.loads(request.data)
+    id = str(data.get("id"))
+    name = data.get("name")
+    price = data.get("price")
+
+    if id in cart:
+        cart[id]["quantity"] = cart[id]["quantity"] + 1
+    else:
+        cart[id] = {
+            "id": id,
+            "name": name,
+            "price": price,
+            "quantity": 1
+        }
+
+    session['cart'] = cart
+
+    quan, price = utils.cart_stats(cart)
+
+    return jsonify({
+        "total_amount": price,
+        "total_quantity": quan
+    })
+
+@app.route('/payment')
+def payment():
+    quan, price = utils.cart_stats(session.get('cart'))
+    cart_info = {
+        "total_amount": price,
+        "total_quantity": quan
+    }
+    return render_template('payment.html',
+                           cart_info=cart_info)
+
+
+@app.route('/api/pay', methods=['post'])
+@decorator.login_required
+def pay():
+    if utils.add_receipt(session.get('cart')):
+        del session['cart']
+        return jsonify({'message': 'Add receipt successful!'})
+
+    return jsonify({'message': 'failed'})
+
+
+@login.user_loader
+def get_user(user_id):
+    return utils.get_user_by_id(user_id=user_id)
 if __name__ == '__main__':
     app.run(debug=True)
