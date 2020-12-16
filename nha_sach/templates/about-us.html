@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AboutUs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#03a6f3">
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/bootstrap.min.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/styles.css') }}">
+</head>
+<body>
+    <section class="about-sec">
+        <div class="about-img">
+            <figure style="background-image: url('../static/images/about-img.jpg');"></figure>
+        </div>
+        <div class="about-content">
+            <h2>About bookstore,</h2>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's printer took a galley of type and Scrambled it to make a type and typesetting industry. Lorem Ipsum has been the book. </p>
+            <p>It has survived not only fiveLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's printer took a galley of type and</p>
+            <div class="btn-sec">
+                <a href="{{ url_for('book_list') }}" class="btn yellow">shop books</a>
+                <a href="{{ url_for('login_usr') }}" class="btn black">subscriptions</a>
+                <a href="{{ url_for('index') }}" class="btn yellow">back</a>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

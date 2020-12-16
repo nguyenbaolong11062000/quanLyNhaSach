@@ -24,12 +24,6 @@ class BookView(ModelView):
     def is_accessible(self):
         return current_user.is_authenticated
 
-class TypeOfBookModelView(ModelView):
-    column_display_pk = True;
-    can_export = True
-
-    def is_accessible(self):
-        return current_user.is_authenticated
 
 class InventoryReportView(ModelView):
     column_display_pk = True;
@@ -123,7 +117,6 @@ class LogoutView(BaseView):
 
 
 
-admin.add_view(TypeOfBookModelView(TypeOfBook, db.session))
 admin.add_view(BookView(Book, db.session))
 admin.add_view(CustomerView(Customer, db.session))
 admin.add_view(InventoryReportView(InventoryReport, db.session))

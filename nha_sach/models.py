@@ -14,11 +14,6 @@ class SaleBase(db.Model):
     name = Column(String(50), nullable=False)
 
 
-class TypeOfBook(SaleBase):
-    __tablename__ = 'typeofbook'
-
-    books = relationship('Book',
-                         backref='typeofbook', lazy=True)
 
 
 class Book(SaleBase):
@@ -27,8 +22,9 @@ class Book(SaleBase):
     description = Column(String(255))
     price = Column(Float, default=0)
     image = Column(String(100))
-    typeofbook_id = Column(Integer, ForeignKey(TypeOfBook.id),
-                           nullable=False)
+    typeofBook_name = Column(String(100), nullable=False)
+    author = Column(String(100), nullable=False)
+    publishingYear = Column(Integer, nullable=False)
     receipt_detail = relationship('ReceiptDetail', backref='book', lazy=True)
     inventory_detail = relationship('InventoryDetailReport', backref='book', lazy=True)
     coupon_detail = relationship('CouponDetail', backref='book', lazy=True)
@@ -74,6 +70,10 @@ class Customer(SaleBase, UserMixin):
 
     def __str__(self):
         return self.name
+
+
+
+
 class Receipt(db.Model):
     __tablename__ = 'receipt'
     id = Column(Integer, primary_key=True, autoincrement=True)

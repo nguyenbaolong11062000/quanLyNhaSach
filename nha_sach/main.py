@@ -14,15 +14,26 @@ def index():
     typeofbooks = utils.read_data()
     return render_template('index.html', typeofbooks=typeofbooks)
 
+@app.route('/privacy-policy')
+def pri_policy():
+    return render_template('privacy-policy.html')
+
+
+@app.route('/about-us')
+def about_us():
+   return render_template('about-us.html')
+
 
 @app.route('/book')
+@decorator.login_required
 def book_list():
     tpbook_id = request.args.get('typeofbook_id')
+    typebook = request.args.get('typebook')
     kw = request.args.get('kw')
+    kw2 = request.args.get('kw2')
     from_price = request.args.get('from_price')
     to_price = request.args.get('to_price')
-    books = utils.read_books(tpbook_id=tpbook_id, kw=kw, from_price=from_price, to_price=to_price)
-
+    books = utils.read_books(tpbook_id=tpbook_id, typebook=typebook, kw=kw, kw2=kw2, from_price=from_price, to_price=to_price)
     return render_template('book-list.html',
                            books=books, tpbook_id=tpbook_id)
 
@@ -46,7 +57,10 @@ def login_usr():
                              User.password == password).first()
         if user:
             login_user(user=user)
-            return redirect(url_for("index"))
+            if "next" in request.args:
+                return redirect(request.args.get('next'))
+            else:
+                return redirect(url_for("index"))
         else:
             err_msg = "Đăng nhập không thành công!"
 
@@ -140,6 +154,7 @@ def cart():
     })
 
 @app.route('/payment')
+@decorator.login_required
 def payment():
     quan, price = utils.cart_stats(session.get('cart'))
     cart_info = {
@@ -151,13 +166,13 @@ def payment():
 
 
 @app.route('/api/pay', methods=['post'])
-@decorator.login_required
 def pay():
     if utils.add_receipt(session.get('cart')):
         del session['cart']
         return jsonify({'message': 'Add receipt successful!'})
 
     return jsonify({'message': 'failed'})
+
 
 
 @login.user_loader

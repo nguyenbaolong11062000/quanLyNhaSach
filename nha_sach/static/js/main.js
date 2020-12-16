@@ -30,6 +30,6 @@ function pay() {
         alert(data.message);
         location.reload();
     }).catch(err => {
-        location.href = '/admin';
+        location.href = '/admin?next=/payment';
     })
 }

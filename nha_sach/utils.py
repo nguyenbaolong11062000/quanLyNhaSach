@@ -8,20 +8,24 @@ def read_data(path='data/typeOfBook.json'):
         return json.load(f)
 
 
-def read_books(tpbook_id=None, kw=None, from_price=None, to_price=None):
+def read_books(tpbook_id=None, typebook=None, kw=None, kw2=None, from_price=None, to_price=None):
     books = Book.query
 
     if tpbook_id:
-        books = books.filter(Book.typeofbook_id == tpbook_id)
-
+        books = books.filter(Book.id == tpbook_id)
     if kw:
         books = books.filter(Book.name.contains(kw))
+    if kw2:
+        books = books.filter(Book.name.contains(kw2))
+    if typebook:
+        books = books.filter(Book.typeofBook_name.contains(typebook))
 
     if from_price and to_price:
         books = books.filter(Book.price.__gt__(from_price),
                              Book.price.__lt__(to_price))
 
     return books.all()
+
     # books = read_data(path='data/books.json')
     #
     # if tpbook_id:
@@ -48,6 +52,7 @@ def get_book_by_id(book_id):
     # for p in books:
     #     if p['id'] == book_id:
     #         return p
+
 
 
 def check_login(username, password, role = UserRole.ADMIN):

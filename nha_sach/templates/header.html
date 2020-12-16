@@ -10,6 +10,7 @@
                         <span class="navbar-toggler-icon" ></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        </ul>
                         <ul class="navbar-nav ml-auto">
                             <li class="navbar-item active">
                                 <a href="{{ url_for('index') }}" class="nav-link">Home</a>
@@ -18,10 +19,10 @@
                                 <a href="{{ url_for('book_list') }}" class="nav-link">Search</a>
                             </li>
                             <li class="navbar-item">
-                                <a href="about.html" class="nav-link">About Us</a>
+                                <a href="{{ url_for('about_us') }}" class="nav-link">About Us</a>
                             </li>
                             <li class="navbar-item">
-                                <a href="faq.html" class="nav-link">FAQ</a>
+                                <a href="{{ url_for('pri_policy') }}" class="nav-link">Privacy</a>
                             </li>
                             {% if current_user.is_authenticated %}
                                 <li class="navbar-item">
@@ -36,15 +37,8 @@
 	                                <a href="{{ url_for('registerCustomer') }}" class="nav-link">Signup</a>
                              </li>
                         </ul>
-                        <div class="cart my-2 my-lg-0">
-                            <span>
-                                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                            </span>
-                            <span class="quntity">3</span>
-                        </div>
-                        <form class="form-inline my-2 my-lg-0">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Search here..." aria-label="Search">
-                            <span class="fa fa-search" onclick="#"></span>
+                        <form class="form-inline my-2 my-lg-0" action="/book">
+                            <input class="form-control mr-sm-2" type="search" placeholder="Search here..." aria-label="Search" name="kw2">
                         </form>
                     </div>
                 </nav>

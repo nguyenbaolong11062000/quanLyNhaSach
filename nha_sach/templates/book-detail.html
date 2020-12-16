@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Chi tiết sản phẩm</title>
+    <title>Book Detail</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
     <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" />
 </head>
@@ -17,7 +17,10 @@
                 <h3>
                     <ul>
                         <li>{{ book.name }}</li>
+                        <li>{{ book.typeofBook_name }}</li>
                         <li>{{ book.description }}</li>
+                        <li>Author: {{ book.author }}</li>
+                        <li>Publishing Year: {{ book.publishingYear }}</li>
                         <li>{{ "{:,.1f}".format(book.price) }} VNĐ</li>
                     </ul>
                 </h3>
