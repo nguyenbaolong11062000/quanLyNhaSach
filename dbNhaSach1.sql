@@ -114,7 +114,7 @@ CREATE TABLE `coupon` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `coupon_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -123,6 +123,7 @@ CREATE TABLE `coupon` (
 
 LOCK TABLES `coupon` WRITE;
 /*!40000 ALTER TABLE `coupon` DISABLE KEYS */;
+INSERT INTO `coupon` VALUES (1,'2020-12-16 23:01:16',2),(2,'2020-12-17 23:01:16',2);
 /*!40000 ALTER TABLE `coupon` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -150,6 +151,7 @@ CREATE TABLE `coupon_detail` (
 
 LOCK TABLES `coupon_detail` WRITE;
 /*!40000 ALTER TABLE `coupon_detail` DISABLE KEYS */;
+INSERT INTO `coupon_detail` VALUES (1,1,200),(1,2,500),(2,4,550);
 /*!40000 ALTER TABLE `coupon_detail` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -174,7 +176,7 @@ CREATE TABLE `customer` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
   CONSTRAINT `customer_chk_1` CHECK ((`active` in (0,1)))
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -183,7 +185,7 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
-INSERT INTO `customer` VALUES (1,'Nguyễn Bảo Long','1851050083long@ou.edu.vn','user1','e10adc3949ba59abbe56e057f20f883e','male','images/upload/anh4.png','0937752035',1,'USER');
+INSERT INTO `customer` VALUES (1,'Nguyễn Bảo Long','1851050083long@ou.edu.vn','user1','e10adc3949ba59abbe56e057f20f883e','male','images/upload/anh4.png','0937752035',1,'USER'),(2,'Mai Xuân Thọ','1851050136tho@ou.edu.vn','user2','e10adc3949ba59abbe56e057f20f883e','male','images/upload/monkey.jpg','0937769846',1,'USER'),(3,'Nguyễn Thị Yến Nhi','1851052805nhi@ou.edu.vn','user4','e10adc3949ba59abbe56e057f20f883e','femal','images/upload/nhi.png','0128567856',1,'USER');
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -213,6 +215,7 @@ CREATE TABLE `dept_detail_report` (
 
 LOCK TABLES `dept_detail_report` WRITE;
 /*!40000 ALTER TABLE `dept_detail_report` DISABLE KEYS */;
+INSERT INTO `dept_detail_report` VALUES (1,1,5000,2000,'0'),(2,1,50000,60000,'10000');
 /*!40000 ALTER TABLE `dept_detail_report` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -227,7 +230,7 @@ CREATE TABLE `dept_report` (
   `id` int NOT NULL AUTO_INCREMENT,
   `created_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -236,6 +239,7 @@ CREATE TABLE `dept_report` (
 
 LOCK TABLES `dept_report` WRITE;
 /*!40000 ALTER TABLE `dept_report` DISABLE KEYS */;
+INSERT INTO `dept_report` VALUES (1,'2020-12-16 23:01:16'),(2,'2020-12-17 23:01:16');
 /*!40000 ALTER TABLE `dept_report` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -265,6 +269,7 @@ CREATE TABLE `inventory_detail_report` (
 
 LOCK TABLES `inventory_detail_report` WRITE;
 /*!40000 ALTER TABLE `inventory_detail_report` DISABLE KEYS */;
+INSERT INTO `inventory_detail_report` VALUES (1,1,250,270,'20'),(1,2,200,100,'0'),(2,4,230,290,'60');
 /*!40000 ALTER TABLE `inventory_detail_report` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -279,7 +284,7 @@ CREATE TABLE `inventory_report` (
   `id` int NOT NULL AUTO_INCREMENT,
   `created_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -288,6 +293,7 @@ CREATE TABLE `inventory_report` (
 
 LOCK TABLES `inventory_report` WRITE;
 /*!40000 ALTER TABLE `inventory_report` DISABLE KEYS */;
+INSERT INTO `inventory_report` VALUES (1,'2020-12-16 23:01:16'),(2,'2020-12-17 23:01:16');
 /*!40000 ALTER TABLE `inventory_report` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -305,7 +311,7 @@ CREATE TABLE `receipt` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `receipt_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -314,7 +320,7 @@ CREATE TABLE `receipt` (
 
 LOCK TABLES `receipt` WRITE;
 /*!40000 ALTER TABLE `receipt` DISABLE KEYS */;
-INSERT INTO `receipt` VALUES (1,'2020-12-16 13:15:28',1);
+INSERT INTO `receipt` VALUES (1,'2020-12-16 13:15:28',1),(2,'2020-12-16 23:01:16',1),(3,'2020-12-16 23:01:16',3),(4,'2020-12-16 23:01:16',4),(5,'2020-12-16 23:19:18',3);
 /*!40000 ALTER TABLE `receipt` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -343,7 +349,7 @@ CREATE TABLE `receipt_detail` (
 
 LOCK TABLES `receipt_detail` WRITE;
 /*!40000 ALTER TABLE `receipt_detail` DISABLE KEYS */;
-INSERT INTO `receipt_detail` VALUES (1,1,1,20000),(1,2,1,100000),(1,3,1,15000),(1,4,1,5000),(1,5,1,192000),(1,6,1,50000),(1,7,1,75000);
+INSERT INTO `receipt_detail` VALUES (1,1,1,20000),(1,2,1,100000),(1,3,1,15000),(1,4,1,5000),(1,5,1,192000),(1,6,1,50000),(1,7,1,75000),(2,1,1,20000),(2,2,1,100000),(2,3,3,15000),(3,1,1,20000),(3,2,1,100000),(3,3,1,15000),(3,4,4,5000),(4,1,4,20000),(4,2,3,100000),(5,1,2,20000),(5,2,2,100000),(5,3,1,15000),(5,5,1,192000);
 /*!40000 ALTER TABLE `receipt_detail` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -367,7 +373,7 @@ CREATE TABLE `user` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
   CONSTRAINT `user_chk_1` CHECK ((`active` in (0,1)))
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -376,7 +382,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'Nguyễn Bảo Long','1851050083long@ou.edu.vn','user1','e10adc3949ba59abbe56e057f20f883e','male','images/upload/anh4.png',1,'USER'),(2,'Quản Trị Viên','admin@ou.edu.vn','admin','e10adc3949ba59abbe56e057f20f883e','male',NULL,NULL,'ADMIN');
+INSERT INTO `user` VALUES (1,'Nguyễn Bảo Long','1851050083long@ou.edu.vn','user1','e10adc3949ba59abbe56e057f20f883e','male','images/upload/anh4.png',1,'USER'),(2,'Quản Trị Viên','admin@ou.edu.vn','admin','e10adc3949ba59abbe56e057f20f883e','male',NULL,NULL,'ADMIN'),(3,'Mai Xuân Thọ','1851050136tho@ou.edu.vn','user2','e10adc3949ba59abbe56e057f20f883e','male','images/upload/monkey.jpg',1,'USER'),(4,'Nguyễn Thị Yến Nhi','1851052805nhi@ou.edu.vn','user4','e10adc3949ba59abbe56e057f20f883e','femal','images/upload/nhi.png',1,'USER');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -389,4 +395,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-16 13:42:53
+-- Dump completed on 2020-12-16 23:20:45

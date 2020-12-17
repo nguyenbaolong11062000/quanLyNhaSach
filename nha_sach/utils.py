@@ -3,10 +3,6 @@ from nha_sach.models import User, UserRole, Book, Customer, Receipt, ReceiptDeta
 from nha_sach import db
 from flask_login import current_user
 
-def read_data(path='data/typeOfBook.json'):
-    with open(path, encoding='utf-8') as f:
-        return json.load(f)
-
 
 def read_books(tpbook_id=None, typebook=None, kw=None, kw2=None, from_price=None, to_price=None):
     books = Book.query

@@ -11,8 +11,7 @@ from nha_sach.models import Customer, User
 
 @app.route('/')
 def index():
-    typeofbooks = utils.read_data()
-    return render_template('index.html', typeofbooks=typeofbooks)
+    return render_template('index.html')
 
 @app.route('/privacy-policy')
 def pri_policy():
@@ -62,7 +61,7 @@ def login_usr():
             else:
                 return redirect(url_for("index"))
         else:
-            err_msg = "Đăng nhập không thành công!"
+            err_msg = "Login unsuccessful!"
 
 
     return render_template("login_user.html", err_msg=err_msg)
@@ -109,9 +108,9 @@ def registerCustomer():
                               password=password, avatar_path=avatar_path):
                 return redirect('/')
             else:
-                err_msg = "Hệ thống đang lỗi...Vui lòng đăng nhập lại sau!"
+                err_msg = "The system is faulty ... Please login again later!"
         else:
-            err_msg = "Mật khẩu không khớp!"
+            err_msg = "Password incorrect!"
 
     return render_template('registerCustomer.html', err_msg=err_msg)
 
